@@ -22,9 +22,13 @@ class Document:
 
 def str_to_doc(line: str):
     try:
-        id, title, text = line.split('###')
-        id = int(id)
-        return Document(id, title, text)
+        lines = line.split('###')
+        if len(lines) == 3:
+            id = int(lines[0])
+            return Document(id, lines[1], lines[2])
+        else:
+            print("NOOOOOOOOOOOOOOOOOOOOO")
+            raise Exception
     except:
-        logging.error('Document string could not be converted to object: %s' % line)
+        print('Document string could not be converted to object: %s' % line)
         return None
