@@ -54,6 +54,7 @@ def get_word_inverted_index(word: str) -> set:
         return set()
     iindex = set()
     path = os.path.join(MAIN_IINDEX_DIR_PATH, word)
+    print(word, 'wgowibgowieb')
     if volume.exists(path):
         with volume.fopen(path, 'r') as f:
             file = f.read()
