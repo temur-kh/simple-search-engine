@@ -13,12 +13,12 @@ app = Flask(__name__)
 @app.route('/', methods=['GET'])
 def handle_query():
     query_sentence: str = request.args.get('query')
-    print(query_sentence)
+    # print(query_sentence)
     if query_sentence is not None:
         doc_ids = search_docs_ids(query_sentence)
-        print(doc_ids)
+        # print(doc_ids)
         docs = find_docs(doc_ids)
-        print(docs)
+        # print(docs)
     else:
         docs = []
     return render_template('results_page.html', docs=docs)
@@ -34,7 +34,7 @@ def handle_document_link(doc_id):
 
 def process(namespace):
     global GLUSTERFS_MASTER_IP_ADDRESS, REDIS_MASTER_IP_ADDRESS
-    print(namespace)
+    # print(namespace)
     GLUSTERFS_MASTER_IP_ADDRESS = namespace.gluster_ip
     REDIS_MASTER_IP_ADDRESS = namespace.redis_ip
     nltk.download('wordnet')
