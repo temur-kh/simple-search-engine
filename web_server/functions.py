@@ -44,8 +44,9 @@ def query_results(query):
             results.append(token)
         elif '*' in token:
             print('here')
-            print(get_bigram_iindex())
+            # print(get_bigram_iindex())
             words = wildcards_process(token, get_bigram_iindex())
+            print(words)
             results.append(list(words))
         else:
             words = find_closest_words(token, get_soundex_iindex())
