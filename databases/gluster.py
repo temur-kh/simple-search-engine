@@ -47,6 +47,7 @@ def get_word_inverted_index(word: str) -> set:
             file = f.read()
             # decoded_nums = custom_decode_ids(file)
             # iindex = iindex.union(set(decoded_nums))
+            print(file.split())
             iindex = iindex.union(set(map(int, file.split())))
     path = os.path.join(AUXILIARY_IINDEX_DIR_PATH, word)
     print(iindex)
