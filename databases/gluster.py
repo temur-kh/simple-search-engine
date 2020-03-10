@@ -58,7 +58,8 @@ def get_word_inverted_index(word: str) -> set:
         with volume.fopen(path, 'r') as f:
             file = f.read()
             print(file)
-            print(file.decode())
+            print(file.decode(), 'orgboreibg')
+            print(file.decode('cp1251', 'gerge'))
             decoded_nums = custom_decode(file)
             iindex = iindex.union(set(decoded_nums))
     path = os.path.join(AUXILIARY_IINDEX_DIR_PATH, word)
