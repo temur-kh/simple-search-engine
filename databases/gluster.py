@@ -95,7 +95,7 @@ def merge_iindexes():
 
 def custom_decode(bytes):
     codes = bytes.decode().split()
-    return [int(str(x).replace('\\x00', '')) for x in codes]
+    return [int(str(x).replace(r'\x00', '')) for x in codes]
 
 
 
