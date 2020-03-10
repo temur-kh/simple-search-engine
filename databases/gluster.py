@@ -1,4 +1,5 @@
 import os
+import codecs
 
 from gluster import gfapi
 
@@ -102,11 +103,12 @@ def update_iindex(iindex_collection, dir_path):
                 print(file)
                 # print(file.decode())
                 # print(str(file.decode().encode()))
-                print(str(file, 'utf-8').split())
-                print(list(map(lambda x: x.encode('iso-8859-1').decode('utf-8'), file.decode().split())))
-                print(list(map(lambda x: x.encode('iso-8859-1').decode('utf-16'), file.decode().split())))
-                line = '{}'.format(file.decode('utf-16'))
+                # print(str(file, 'utf-8').split())
+                # print(list(map(lambda x: x.encode('iso-8859-1').decode('utf-8'), file.decode().split())))
+                # print(list(map(lambda x: x.encode('iso-8859-1').decode('utf-16'), file.decode().split())))
+                line = '{}'.format(file.decode('cp1251'))
                 print(line)
+                print(line.split)
                 old_iindex = set(map(int, line.split()))
             iindex = iindex.union(old_iindex)
         content = ' '.join([str(doc_id) for doc_id in iindex])
