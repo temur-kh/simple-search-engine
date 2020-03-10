@@ -93,6 +93,12 @@ def merge_iindexes():
             volume.remove(remove_path)
 
 
+def custom_decode(bytes):
+    codes = bytes.decode().split()
+    return [int(str(x).replace('\\x00', '')) for x in codes]
+
+
+
 def update_iindex(iindex_collection, dir_path):
     for word in iindex_collection:
         path = os.path.join(dir_path, word)
@@ -100,20 +106,8 @@ def update_iindex(iindex_collection, dir_path):
         if volume.exists(path):
             with volume.fopen(path, 'r') as f:
                 file = f.read()
-                print(file)
-                # print(file.decode())
-                print(file.decode().split())
-                # print(str(file, 'utf-8').split())
-                # print(list(map(lambda x: x.encode('iso-8859-1').decode('utf-8'), file.decode().split())))
-                # print(list(map(lambda x: x.encode('iso-8859-1').decode('utf-16'), file.decode().split())))
-
-                line = '{}'.format(file.decode('cp1251'))
-                print(line)
-                print(line.split())
-                new = line.encode('utf-8')
-                print(new)
-                print([int(b.decode('cp1251')) for b in new.split()])
-                old_iindex = set(map(int, line.split()))
+                decoded_nums = custom_decode(file)
+                old_iindex = set(decoded_nums)
             iindex = iindex.union(old_iindex)
         content = ' '.join([str(doc_id) for doc_id in iindex])
         with volume.fopen(path, 'w') as f:
