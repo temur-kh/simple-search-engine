@@ -105,7 +105,7 @@ def update_iindex(iindex_collection, dir_path):
                 print(str(file).split())
                 print('{}'.format(file.decode()))
                 line = '{}'.format(file.decode())
-                print(map(lambda x: str(x, 'utf-8'), line.split()))
+                print(list(map(lambda x: str(x, 'utf-8'), line.split())))
                 old_iindex = set(map(int, line.split()))
             iindex = iindex.union(old_iindex)
         content = ' '.join([str(doc_id) for doc_id in iindex])
