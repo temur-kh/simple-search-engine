@@ -56,15 +56,15 @@ def get_word_inverted_index(word: str) -> set:
     path = os.path.join(MAIN_IINDEX_DIR_PATH, word)
     if volume.exists(path):
         with volume.fopen(path, 'r') as f:
-            iindex = iindex.union(set(map(int, f.read().split())))
+            iindex = iindex.union(set(map(int, f.read().strip().split())))
     path = os.path.join(AUXILIARY_IINDEX_DIR_PATH, word)
     if volume.exists(path):
         with volume.fopen(path, 'r') as f:
-            iindex = iindex.union(set(map(int, f.read().split())))
+            iindex = iindex.union(set(map(int, f.read().strip().split())))
     path = os.path.join(AUXILIARY_IINDEX_DIR_PATH, word)
     if volume.exists(path):
         with volume.fopen(path, 'r') as f:
-            iindex = iindex.difference(set(map(int, f.read().split())))
+            iindex = iindex.difference(set(map(int, f.read().strip().split())))
     return iindex
 
 
@@ -95,7 +95,7 @@ def update_iindex(iindex_collection, dir_path):
             iindex = iindex_collection[word]
             if volume.exists(path):
                 with volume.fopen(path, 'r') as f:
-                    old_iindex = set(map(int, f.read().split()))
+                    old_iindex = set(map(int, f.read().strip().split()))
                 iindex = iindex.union(old_iindex)
             content = ' '.join([str(doc_id) for doc_id in iindex])
             with volume.fopen(path, 'w') as f:
