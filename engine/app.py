@@ -21,6 +21,6 @@ def crawler():
     force_merge_iindexes()
 
 
-def process(**kwargs):
+def process(*args, **kwargs):
     init_databases()
     crawler()
