@@ -109,8 +109,12 @@ def remove_iindex(iindex_collection):
 def add_iindex(iindex_collection):
     update_iindex(iindex_collection, AUXILIARY_IINDEX_DIR_PATH)
 
+
 def init_gluster():
-    volume.mkdir(MAIN_IINDEX_DIR_PATH)
-    volume.mkdir(AUXILIARY_IINDEX_DIR_PATH)
-    volume.mkdir(REMOVABLE_IINDEX_DIR_PATH)
-    volume.mkdir(DOCUMENTS_DIR_PATH)
+    try:
+        volume.mkdir(MAIN_IINDEX_DIR_PATH)
+        volume.mkdir(AUXILIARY_IINDEX_DIR_PATH)
+        volume.mkdir(REMOVABLE_IINDEX_DIR_PATH)
+        volume.mkdir(DOCUMENTS_DIR_PATH)
+    except FileExistsError:
+        pass
