@@ -17,7 +17,6 @@ def crawler():
         addable_docs = add_stream.next()
         add_docs(addable_docs)
         merge_iindexes_if_needed()
-        time.sleep(5)
     force_merge_iindexes()
 
 

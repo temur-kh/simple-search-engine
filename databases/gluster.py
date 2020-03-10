@@ -57,18 +57,21 @@ def get_word_inverted_index(word: str) -> set:
     path = os.path.join(MAIN_IINDEX_DIR_PATH, word)
     if volume.exists(path):
         with volume.fopen(path, 'r') as f:
-            file = f.read().decode('utf-8').strip()
-            iindex = iindex.union(set(map(int, file.split())))
+            file = f.read()
+            decoded_nums = custom_decode(file)
+            iindex = iindex.union(set(decoded_nums))
     path = os.path.join(AUXILIARY_IINDEX_DIR_PATH, word)
     if volume.exists(path):
         with volume.fopen(path, 'r') as f:
-            file = f.read().decode('utf-8').strip()
-            iindex = iindex.union(set(map(int, file.split())))
+            file = f.read()
+            decoded_nums = custom_decode(file)
+            iindex = iindex.union(set(decoded_nums))
     path = os.path.join(REMOVABLE_IINDEX_DIR_PATH, word)
     if volume.exists(path):
         with volume.fopen(path, 'r') as f:
-            file = f.read().decode('utf-8').strip()
-            iindex = iindex.difference(set(map(int, file.split())))
+            file = f.read()
+            decoded_nums = custom_decode(file)
+            iindex = iindex.difference(set(decoded_nums))
     return iindex
 
 
