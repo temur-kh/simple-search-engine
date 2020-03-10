@@ -32,11 +32,11 @@ def update_words_set(words_set):
 
 
 def iindex_to_json(iindex):
-    return json.dumps({key: list(value) for key, value in iindex.iteritems()})
+    return json.dumps({key: list(value) for key, value in iindex.items()})
 
 
 def json_to_iindex(json_obj):
-    return {key: set(value) for key, value in json.loads(json_obj).iteritems()}
+    return {key: set(value) for key, value in json.loads(json_obj).items()}
 
 
 def get_soundex_iindex():
