@@ -1,5 +1,4 @@
 import os
-import codecs
 
 from gluster import gfapi
 
@@ -124,8 +123,9 @@ def update_iindex(iindex_collection, dir_path):
                 old_iindex = set(decoded_nums)
             iindex = iindex.union(old_iindex)
         content = ' '.join([str(doc_id) for doc_id in iindex])
+        print(content)
         with volume.fopen(path, 'w') as f:
-            f.write(content.encode('utf-8'))
+            f.write(content)
 
 
 def remove_iindex(iindex_collection):
