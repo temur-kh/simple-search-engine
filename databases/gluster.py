@@ -27,7 +27,7 @@ def get_documents_by_ids(ids):
         if not volume.exists(path):
             continue
         with volume.fopen(path, 'rb') as f:
-            line = f.read(1).strip()
+            line = f.read(1).decode('utf-8').strip()
             doc = str_to_doc(line)
             if doc:
                 docs.append(doc)
@@ -56,15 +56,18 @@ def get_word_inverted_index(word: str) -> set:
     path = os.path.join(MAIN_IINDEX_DIR_PATH, word)
     if volume.exists(path):
         with volume.fopen(path, 'rb') as f:
-            iindex = iindex.union(set(map(int, f.read().strip().split())))
+            file = f.read().decode('utf-8').strip()
+            iindex = iindex.union(set(map(int, file.split())))
     path = os.path.join(AUXILIARY_IINDEX_DIR_PATH, word)
     if volume.exists(path):
         with volume.fopen(path, 'rb') as f:
-            iindex = iindex.union(set(map(int, f.read().strip().split())))
+            file = f.read().decode('utf-8').strip()
+            iindex = iindex.union(set(map(int, file.split())))
     path = os.path.join(AUXILIARY_IINDEX_DIR_PATH, word)
     if volume.exists(path):
         with volume.fopen(path, 'rb') as f:
-            iindex = iindex.difference(set(map(int, f.read().strip().split())))
+            file = f.read().decode('utf-8').strip()
+            iindex = iindex.difference(set(map(int, file.split())))
     return iindex
 
 
@@ -94,9 +97,8 @@ def update_iindex(iindex_collection, dir_path):
         iindex = iindex_collection[word]
         if volume.exists(path):
             with volume.fopen(path, 'rb') as f:
-                cont = f.read()
-                print(cont, cont.decode('utf-8'))
-                old_iindex = set(map(int, cont.strip().split()))
+                file = f.read().decode('utf-8').strip()
+                old_iindex = set(map(int, file.split()))
             iindex = iindex.union(old_iindex)
         content = ' '.join([str(doc_id) for doc_id in iindex])
         with volume.fopen(path, 'wb') as f:
