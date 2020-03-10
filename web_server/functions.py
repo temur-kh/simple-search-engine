@@ -72,6 +72,7 @@ def search_docs_ids(query):
             inner_doc_ids = set()
             for word in res:
                 inner_doc_ids = inner_doc_ids.union(get_word_inverted_index(word))
+                print(get_word_inverted_index(word), 'iindex')
             print(inner_doc_ids, 'inner')
         else:
             inner_doc_ids = get_word_inverted_index(res)
