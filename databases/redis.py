@@ -63,7 +63,7 @@ def add_redis_iindex(iindex_collection, old_iindex_collection):
     for index in iindex_collection:
         new_iindex = iindex_collection[index]
         if index in old_iindex_collection:
-            new_iindex = new_iindex.intersection(old_iindex_collection[index])
+            new_iindex = new_iindex.union(old_iindex_collection[index])
         old_iindex_collection[index] = new_iindex
     return old_iindex_collection
 
