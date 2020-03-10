@@ -31,24 +31,32 @@ def update_words_set(words_set):
         r.sadd(WORDS_SET, word)
 
 
+def iindex_to_json(iindex):
+    return json.dumps({key: list(value) for key, value in iindex.iteritems()})
+
+
+def json_to_iindex(json_obj):
+    return {key: set(value) for key, value in json.loads(json_obj).iteritems()}
+
+
 def get_soundex_iindex():
-    return json.loads(r.get(SOUNDEX_IINDEX_DICT))
+    return json_to_iindex(r.get(SOUNDEX_IINDEX_DICT))
 
 
 def add_soundex_iindex(soundex_iindex):
     old_iindex_collection = get_soundex_iindex()
     results = add_redis_iindex(soundex_iindex, old_iindex_collection)
-    r.set(SOUNDEX_IINDEX_DICT, json.dumps(results))
+    r.set(SOUNDEX_IINDEX_DICT, iindex_to_json(results))
 
 
 def get_bigram_iindex():
-    return json.loads(r.get(BIGRAM_IINDEX_DICT))
+    return json_to_iindex(r.get(BIGRAM_IINDEX_DICT))
 
 
 def add_bigram_iindex(bigram_iindex):
     old_iindex_collection = get_bigram_iindex()
     results = add_redis_iindex(bigram_iindex, old_iindex_collection)
-    r.set(BIGRAM_IINDEX_DICT, json.dumps(results))
+    r.set(BIGRAM_IINDEX_DICT, iindex_to_json(results))
 
 
 def add_redis_iindex(iindex_collection, old_iindex_collection):
