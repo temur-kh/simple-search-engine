@@ -1,7 +1,7 @@
 from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
 import logging
-from engine import engine_process
-from web_server import web_server_process
+from engine import process as engine_process
+from web_server import process as web_server_process
 
 
 def setup_parser(parser):
