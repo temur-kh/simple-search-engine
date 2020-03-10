@@ -17,6 +17,7 @@ def find_closest_words(query_word, soundex_iindex):
 
 def wildcards_process(query_word, bigram_iindex):
     query_bigrams = get_bigrams(query_word)
+    print(query_bigrams)
     # find similar words by bigrams
     similars = None
     for bigram in query_bigrams:
@@ -24,6 +25,7 @@ def wildcards_process(query_word, bigram_iindex):
             similars = bigram_iindex[bigram]
         else:
             similars = similars.intersection(bigram_iindex[bigram])
+    print(similars)
     # post-filter these words from extra terms
     true_similars = set()
     star_pos = query_word.find('*')
@@ -32,6 +34,7 @@ def wildcards_process(query_word, bigram_iindex):
     for word in similars:
         if (start_part == '' or word.startswith(start_part)) and (end_part == '' or word.endswith(end_part)):
             true_similars.add(word)
+    print(true_similars)
     return true_similars
 
 
