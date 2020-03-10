@@ -102,10 +102,11 @@ def update_iindex(iindex_collection, dir_path):
                 file = f.read()
                 print(file)
                 # print(file.decode())
-                # print(str(file.decode().encode()))
+                print(file.decode().split())
                 # print(str(file, 'utf-8').split())
                 # print(list(map(lambda x: x.encode('iso-8859-1').decode('utf-8'), file.decode().split())))
                 # print(list(map(lambda x: x.encode('iso-8859-1').decode('utf-16'), file.decode().split())))
+
                 line = '{}'.format(file.decode('cp1251'))
                 print(line)
                 print(line.split())
@@ -117,7 +118,7 @@ def update_iindex(iindex_collection, dir_path):
         content = ' '.join([str(doc_id) for doc_id in iindex])
         with volume.fopen(path, 'w') as f:
             print(content)
-            f.write(content)
+            f.write(content.encode('utf-8'))
 
 
 def remove_iindex(iindex_collection):
