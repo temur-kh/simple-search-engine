@@ -140,11 +140,16 @@ def add_iindex(iindex_collection):
 
 
 def init_gluster():
-    try:
-        volume.mkdir(MAIN_IINDEX_DIR_PATH)
-        volume.mkdir(AUXILIARY_IINDEX_DIR_PATH)
-        volume.mkdir(REMOVABLE_IINDEX_DIR_PATH)
-        volume.mkdir(DOCUMENTS_DIR_PATH)
-    except FileExistsError:
-        pass
+    if volume.exists(MAIN_IINDEX_DIR_PATH):
+        volume.rmdir(MAIN_IINDEX_DIR_PATH)
+    volume.mkdir(MAIN_IINDEX_DIR_PATH)
+    if volume.exists(AUXILIARY_IINDEX_DIR_PATH):
+        volume.rmdir(AUXILIARY_IINDEX_DIR_PATH)
+    volume.mkdir(AUXILIARY_IINDEX_DIR_PATH)
+    if volume.exists(REMOVABLE_IINDEX_DIR_PATH):
+        volume.rmdir(REMOVABLE_IINDEX_DIR_PATH)
+    volume.mkdir(REMOVABLE_IINDEX_DIR_PATH)
+    if volume.exists(DOCUMENTS_DIR_PATH):
+        volume.rmdir(DOCUMENTS_DIR_PATH)
+    volume.mkdir(DOCUMENTS_DIR_PATH)
     print(len(volume.listdir(MAIN_IINDEX_DIR_PATH)), 'start')
