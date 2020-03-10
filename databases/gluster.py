@@ -44,7 +44,7 @@ def remove_documents_by_ids(ids):
 
 def add_documents(docs: [Document]):
     for doc in docs:
-        print(len(volume.listdir(MAIN_IINDEX_DIR_PATH)))
+        print(len(volume.listdir(MAIN_IINDEX_DIR_PATH)), 'add_doc')
         path = os.path.join(DOCUMENTS_DIR_PATH, str(doc.id))
         with volume.fopen(path, 'w') as f:
             f.write(doc.__str__())
@@ -55,7 +55,7 @@ def get_word_inverted_index(word: str) -> set:
         return set()
     iindex = set()
     path = os.path.join(MAIN_IINDEX_DIR_PATH, word)
-    print(len(volume.listdir(MAIN_IINDEX_DIR_PATH)))
+    print(len(volume.listdir(MAIN_IINDEX_DIR_PATH)), 'get_word_ii')
     if volume.exists(path):
         with volume.fopen(path, 'r') as f:
             file = f.read()
@@ -116,7 +116,7 @@ def custom_decode(bytes):
 
 def update_iindex(iindex_collection, dir_path):
     for word in iindex_collection:
-        print(len(volume.listdir(MAIN_IINDEX_DIR_PATH)))
+        print(len(volume.listdir(MAIN_IINDEX_DIR_PATH)), 'update_ii')
         path = os.path.join(dir_path, word)
         iindex = iindex_collection[word]
         if volume.exists(path):
@@ -147,3 +147,4 @@ def init_gluster():
         volume.mkdir(DOCUMENTS_DIR_PATH)
     except FileExistsError:
         pass
+    print(len(volume.listdir(MAIN_IINDEX_DIR_PATH)), 'start')
