@@ -13,7 +13,6 @@ def _get_volume():
     if _VOLUME is None:
         volume = gfapi.Volume(GLUSTERFS_MASTER_IP_ADDRESS, ENGINE_DATE_VOLUME)
         volume.mount()
-        volume.chmod('/', 777)
         _VOLUME = volume
     return _VOLUME
 
