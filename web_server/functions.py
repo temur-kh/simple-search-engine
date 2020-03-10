@@ -71,5 +71,5 @@ def search_docs_ids(query):
 
 def find_docs(ids):
     docs = get_documents_by_ids(ids)
-    formatted = [{'title':doc.title, 'text':doc.text, 'id':doc.id} for doc in docs]
-    return formatted
+    # formatted = [{'title':doc.title, 'text':doc.text, 'id':doc.id} for doc in docs]
+    return docs
