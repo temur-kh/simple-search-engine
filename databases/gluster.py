@@ -106,13 +106,14 @@ def update_iindex(iindex_collection, dir_path):
         if volume.exists(path):
             with volume.fopen(path, 'r') as f:
                 file = f.read()
+                print(file.decode())
                 decoded_nums = custom_decode(file)
                 print(decoded_nums)
                 old_iindex = set(decoded_nums)
             iindex = iindex.union(old_iindex)
         content = ' '.join([str(doc_id) for doc_id in iindex])
         with volume.fopen(path, 'w') as f:
-            print(content)
+            # print(content)
             f.write(content.encode('utf-8'))
 
 
