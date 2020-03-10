@@ -22,6 +22,7 @@ volume = _get_volume()
 
 def get_documents_by_ids(ids):
     docs = []
+    print("I'm hereeeeeeeeee")
     for id in ids:
         path = os.path.join(DOCUMENTS_DIR_PATH, str(id))
         if not volume.exists(path):
@@ -29,7 +30,9 @@ def get_documents_by_ids(ids):
             continue
         with volume.fopen(path, 'r') as f:
             line = f.read().decode('utf-8').strip()
+            print(line)
             doc = str_to_doc(line)
+            print(doc)
             if doc:
                 docs.append(doc)
     return docs
