@@ -96,10 +96,11 @@ def update_iindex(iindex_collection, dir_path):
         path = os.path.join(dir_path, word)
         iindex = iindex_collection[word]
         if volume.exists(path):
-            with volume.fopen(path, 'r') as f:
+            with volume.fopen(path, 'rb') as f:
                 file = f.read()
                 print(file)
                 print(file.decode('utf-8').strip())
+                print(str(file.decode('utf-8')).split())
                 print(file.decode('utf-8').strip().split())
                 old_iindex = set(map(int, file.decode('utf-8').strip().split()))
             iindex = iindex.union(old_iindex)
