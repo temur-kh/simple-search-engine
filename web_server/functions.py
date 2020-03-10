@@ -65,18 +65,21 @@ def query_results(query):
 def search_docs_ids(query):
     # search for all relevant documents using a logical query
     results = query_results(query)
+    print(results)
     doc_ids = None
     for res in results:
         if isinstance(res, list):
             inner_doc_ids = set()
             for word in res:
                 inner_doc_ids = inner_doc_ids.union(get_word_inverted_index(word))
+            print(inner_doc_ids, 'inner')
         else:
             inner_doc_ids = get_word_inverted_index(res)
         if doc_ids is None:
             doc_ids = inner_doc_ids
         else:
             doc_ids = doc_ids.intersection(inner_doc_ids)
+        print(doc_ids, 'doc_ids')
     if doc_ids is None:
         return []
     else:
