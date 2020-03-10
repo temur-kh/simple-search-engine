@@ -63,19 +63,19 @@ def get_word_inverted_index(word: str) -> set:
     if volume.exists(path):
         with volume.fopen(path, 'r') as f:
             file = f.read()
-            decoded_nums = custom_decode(file)
+            decoded_nums = custom_decode_ids(file)
             iindex = iindex.union(set(decoded_nums))
     path = os.path.join(AUXILIARY_IINDEX_DIR_PATH, word)
     if volume.exists(path):
         with volume.fopen(path, 'r') as f:
             file = f.read()
-            decoded_nums = custom_decode(file)
+            decoded_nums = custom_decode_ids(file)
             iindex = iindex.union(set(decoded_nums))
     path = os.path.join(REMOVABLE_IINDEX_DIR_PATH, word)
     if volume.exists(path):
         with volume.fopen(path, 'r') as f:
             file = f.read()
-            decoded_nums = custom_decode(file)
+            decoded_nums = custom_decode_ids(file)
             iindex = iindex.difference(set(decoded_nums))
     return iindex
 
@@ -101,7 +101,16 @@ def merge_iindexes():
             volume.remove(remove_path)
 
 
-def custom_decode(bytes):
+def custom_decode_text(bytes):
+    if bytes is not None:
+        codes = bytes.decode().split()
+        words = [str(x).replace('\x00', '') for x in codes]
+        return ' '.join(words)
+    else:
+        return ''
+
+
+def custom_decode_ids(bytes):
     if bytes is not None:
         codes = bytes.decode().split()
         str_nums = [str(x).replace('\x00', '') for x in codes]
@@ -124,7 +133,7 @@ def update_iindex(iindex_collection, dir_path):
         if volume.exists(path):
             with volume.fopen(path, 'r') as f:
                 file = f.read()
-                decoded_nums = custom_decode(file)
+                decoded_nums = custom_decode_ids(file)
                 old_iindex = set(decoded_nums)
             iindex = iindex.union(old_iindex)
         content = ' '.join([str(doc_id) for doc_id in iindex])
