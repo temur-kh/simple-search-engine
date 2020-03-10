@@ -26,7 +26,7 @@ def get_documents_by_ids(ids):
         path = os.path.join(DOCUMENTS_DIR_PATH, str(id))
         if not volume.exists(path):
             continue
-        with volume.fopen(path, 'r') as f:
+        with volume.fopen(path, 'rb') as f:
             line = f.read(1).strip()
             doc = str_to_doc(line)
             if doc:
@@ -45,7 +45,7 @@ def remove_documents_by_ids(ids):
 def add_documents(docs: [Document]):
     for doc in docs:
         path = os.path.join(DOCUMENTS_DIR_PATH, str(doc.id))
-        with volume.fopen(path, 'w') as f:
+        with volume.fopen(path, 'wb') as f:
             f.write(doc.__str__())
 
 
@@ -55,15 +55,15 @@ def get_word_inverted_index(word: str) -> set:
     iindex = set()
     path = os.path.join(MAIN_IINDEX_DIR_PATH, word)
     if volume.exists(path):
-        with volume.fopen(path, 'r') as f:
+        with volume.fopen(path, 'rb') as f:
             iindex = iindex.union(set(map(int, f.read().strip().split())))
     path = os.path.join(AUXILIARY_IINDEX_DIR_PATH, word)
     if volume.exists(path):
-        with volume.fopen(path, 'r') as f:
+        with volume.fopen(path, 'rb') as f:
             iindex = iindex.union(set(map(int, f.read().strip().split())))
     path = os.path.join(AUXILIARY_IINDEX_DIR_PATH, word)
     if volume.exists(path):
-        with volume.fopen(path, 'r') as f:
+        with volume.fopen(path, 'rb') as f:
             iindex = iindex.difference(set(map(int, f.read().strip().split())))
     return iindex
 
@@ -80,7 +80,7 @@ def merge_iindexes():
         remove_path = os.path.join(REMOVABLE_IINDEX_DIR_PATH, word)
         iindex = get_word_inverted_index(word)
         content = ' '.join([str(doc for doc in iindex)])
-        with volume.fopen(main_path, 'w') as f:
+        with volume.fopen(main_path, 'wb') as f:
             f.write(content)
         if volume.exists(aux_path):
             volume.remove(aux_path)
@@ -94,14 +94,15 @@ def update_iindex(iindex_collection, dir_path):
             path = os.path.join(dir_path, word)
             iindex = iindex_collection[word]
             if volume.exists(path):
-                with volume.fopen(path, 'r') as f:
+                with volume.fopen(path, 'rb') as f:
                     old_iindex = set(map(int, f.read().strip().split()))
                 iindex = iindex.union(old_iindex)
             content = ' '.join([str(doc_id) for doc_id in iindex])
-            with volume.fopen(path, 'w') as f:
+            with volume.fopen(path, 'wb') as f:
                 f.write(content)
         except:
             print('error:', word)
+            return
 
 
 def remove_iindex(iindex_collection):
