@@ -26,7 +26,7 @@ def get_documents_by_ids(ids):
         path = os.path.join(DOCUMENTS_DIR_PATH, str(id))
         if not volume.exists(path):
             continue
-        with volume.fopen(path, 'rb') as f:
+        with volume.fopen(path, 'r') as f:
             line = f.read(1).decode('utf-8').strip()
             doc = str_to_doc(line)
             if doc:
@@ -45,7 +45,7 @@ def remove_documents_by_ids(ids):
 def add_documents(docs: [Document]):
     for doc in docs:
         path = os.path.join(DOCUMENTS_DIR_PATH, str(doc.id))
-        with volume.fopen(path, 'wb') as f:
+        with volume.fopen(path, 'w') as f:
             f.write(doc.__str__())
 
 
@@ -55,17 +55,17 @@ def get_word_inverted_index(word: str) -> set:
     iindex = set()
     path = os.path.join(MAIN_IINDEX_DIR_PATH, word)
     if volume.exists(path):
-        with volume.fopen(path, 'rb') as f:
+        with volume.fopen(path, 'r') as f:
             file = f.read().decode('utf-8').strip()
             iindex = iindex.union(set(map(int, file.split())))
     path = os.path.join(AUXILIARY_IINDEX_DIR_PATH, word)
     if volume.exists(path):
-        with volume.fopen(path, 'rb') as f:
+        with volume.fopen(path, 'r') as f:
             file = f.read().decode('utf-8').strip()
             iindex = iindex.union(set(map(int, file.split())))
     path = os.path.join(AUXILIARY_IINDEX_DIR_PATH, word)
     if volume.exists(path):
-        with volume.fopen(path, 'rb') as f:
+        with volume.fopen(path, 'r') as f:
             file = f.read().decode('utf-8').strip()
             iindex = iindex.difference(set(map(int, file.split())))
     return iindex
@@ -96,15 +96,17 @@ def update_iindex(iindex_collection, dir_path):
         path = os.path.join(dir_path, word)
         iindex = iindex_collection[word]
         if volume.exists(path):
-            with volume.fopen(path, 'rb') as f:
+            with volume.fopen(path, 'r') as f:
                 file = f.read()
                 print(file)
-                line = '{}'.format(file.decode('ASCII'))
+                print(file.decode())
+                print('{}'.format(file.decode()))
+                line = '{}'.format(file.decode())
                 print(line.split())
                 old_iindex = set(map(int, line.split()))
             iindex = iindex.union(old_iindex)
         content = ' '.join([str(doc_id) for doc_id in iindex])
-        with volume.fopen(path, 'wb') as f:
+        with volume.fopen(path, 'w') as f:
             print(content)
             f.write(content)
 
