@@ -1,6 +1,7 @@
 import os
 
 from flask import Flask, request, render_template, abort
+import nltk
 
 from web_server.functions import search_docs_ids, find_docs
 from config import GLUSTERFS_MASTER_IP_ADDRESS, REDIS_MASTER_IP_ADDRESS
@@ -29,4 +30,7 @@ def process(**kwargs):
     global GLUSTERFS_MASTER_IP_ADDRESS, REDIS_MASTER_IP_ADDRESS
     GLUSTERFS_MASTER_IP_ADDRESS = kwargs['gluster_ip']
     REDIS_MASTER_IP_ADDRESS = kwargs['redis_ip']
+    nltk.download('wordnet')
+    nltk.download('punkt')
+    nltk.download('stopwords')
     app.run(debug=True)
