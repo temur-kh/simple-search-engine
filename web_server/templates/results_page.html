@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Search
+{% endblock %}
+
+{% block content %}
+    <form action="/" method="get">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" id="query" name="query" placeholder="Search documents"
+                   aria-label="Search documents" aria-describedby="search-button">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="button" id="search-button">Search</button>
+            </div>
+        </div>
+    </form>
+    <br>
+    {% for doc in docs %}
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{% doc.title %}</h5>
+                <p class="card-text">{% doc.text|truncate(50, True) %}</p>
+                <a href="/documents/{% doc.id %}" class="btn btn-outline-secondary">Link</a>
+            </div>
+        </div>
+    {% endfor %}
+
+{% endblock %}
