@@ -56,7 +56,9 @@ def remove_documents_by_ids(ids):
 def add_documents(docs: [Document]):
     for doc in docs:
         # print(len(volume.listdir(MAIN_IINDEX_DIR_PATH)), 'add_doc')
-        path = os.path.join(os.path.join(VOLUME_DIR_PATH, DOCUMENTS_DIR_PATH), str(doc.id))
+        dir_path = os.path.join(VOLUME_DIR_PATH, DOCUMENTS_DIR_PATH)
+        print(dir_path)
+        path = os.path.join(dir_path, str(doc.id))
         with open(path, 'w') as f:
             print(doc.__str__())
             f.write(doc.__str__())
