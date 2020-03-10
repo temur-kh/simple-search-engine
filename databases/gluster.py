@@ -51,6 +51,7 @@ def add_documents(docs: [Document]):
         # print(len(volume.listdir(MAIN_IINDEX_DIR_PATH)), 'add_doc')
         path = os.path.join(DOCUMENTS_DIR_PATH, str(doc.id))
         with volume.fopen(path, 'w') as f:
+            print(doc.__str__())
             f.write(doc.__str__())
 
 
