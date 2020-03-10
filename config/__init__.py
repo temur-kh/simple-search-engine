@@ -12,7 +12,7 @@ WORDS_SET = 'words_set'
 SOUNDEX_IINDEX_DICT = 'soudnex_iindex_dict'
 BIGRAM_IINDEX_DICT = 'bigram_iindex_dict'
 
-RESOURCES_DIR_PATH = '../resources/'
+RESOURCES_DIR_PATH = 'shared/resources/'
 
 EMPTY_CONTENT = '[empty]'
 
