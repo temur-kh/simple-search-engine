@@ -46,6 +46,7 @@ def add_documents(docs: [Document]):
     for doc in docs:
         path = os.path.join(DOCUMENTS_DIR_PATH, str(doc.id))
         with volume.fopen(path, 'w') as f:
+            print(doc.__str__())
             f.write(doc.__str__())
 
 
@@ -63,7 +64,7 @@ def get_word_inverted_index(word: str) -> set:
         with volume.fopen(path, 'r') as f:
             file = f.read().decode('utf-8').strip()
             iindex = iindex.union(set(map(int, file.split())))
-    path = os.path.join(AUXILIARY_IINDEX_DIR_PATH, word)
+    path = os.path.join(REMOVABLE_IINDEX_DIR_PATH, word)
     if volume.exists(path):
         with volume.fopen(path, 'r') as f:
             file = f.read().decode('utf-8').strip()
@@ -84,6 +85,7 @@ def merge_iindexes():
         iindex = get_word_inverted_index(word)
         content = ' '.join([str(doc for doc in iindex)])
         with volume.fopen(main_path, 'w') as f:
+            print(content)
             f.write(content)
         if volume.exists(aux_path):
             volume.remove(aux_path)
