@@ -13,6 +13,7 @@ app = Flask(__name__)
 @app.route('/', methods=['GET'])
 def handle_query():
     query_sentence: str = request.args.get('query')
+    print(query_sentence)
     doc_ids = search_docs_ids(query_sentence)
     docs = find_docs(doc_ids)
     return render_template('results_page.html', context={'docs': docs})
