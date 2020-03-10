@@ -6,7 +6,7 @@ REMOVABLE_IINDEX_DIR_PATH = '/removable-inverted-index/'
 GLUSTERFS_MASTER_IP_ADDRESS = '127.0.0.1'
 ENGINE_DATE_VOLUME = 'engine-data-volume'
 
-REDIS_MASTER_IP_ADDRESS = '127.0.0.1'
+REDIS_MASTER_IP_ADDRESS = 'gfs1'
 
 WORDS_SET = 'words_set'
 SOUNDEX_IINDEX_DICT = 'soudnex_iindex_dict'
