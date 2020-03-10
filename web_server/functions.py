@@ -15,7 +15,7 @@ def find_closest_words(query_word, soundex_iindex):
         return []
     # find the closest candidates by the Levinstein distance
     min_dist = similars[0][1]
-    closest_words = [word for word, dist in similars if dist == min_dist]
+    closest_words = [preprocess(word)[0] for word, dist in similars if dist == min_dist]
     print(closest_words)
     return closest_words
 
