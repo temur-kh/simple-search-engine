@@ -18,7 +18,7 @@ class ReutersStream:
             return None
         filename = 'reut2-{}.sgm'.format(str(self._index).zfill(3))
         path = os.path.join(self.dir_path, filename)
-        soup = BeautifulSoup(open(filename, 'rb'), 'html.parser')
+        soup = BeautifulSoup(open(path, 'rb'), 'html.parser')
         collection = []
         for article in soup.find_all('reuters'):
             try:
