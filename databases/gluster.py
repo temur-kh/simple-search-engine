@@ -90,15 +90,18 @@ def merge_iindexes():
 
 def update_iindex(iindex_collection, dir_path):
     for word in iindex_collection:
-        path = os.path.join(dir_path, word)
-        iindex = iindex_collection[word]
-        if volume.exists(path):
-            with volume.fopen(path, 'r') as f:
-                old_iindex = set(map(int, f.read().split()))
-            iindex = iindex.union(old_iindex)
-        content = ' '.join([str(doc_id) for doc_id in iindex])
-        with volume.fopen(path, 'w') as f:
-            f.write(content)
+        try:
+            path = os.path.join(dir_path, word)
+            iindex = iindex_collection[word]
+            if volume.exists(path):
+                with volume.fopen(path, 'r') as f:
+                    old_iindex = set(map(int, f.read().split()))
+                iindex = iindex.union(old_iindex)
+            content = ' '.join([str(doc_id) for doc_id in iindex])
+            with volume.fopen(path, 'w') as f:
+                f.write(content)
+        except:
+            print('error:', word)
 
 
 def remove_iindex(iindex_collection):
