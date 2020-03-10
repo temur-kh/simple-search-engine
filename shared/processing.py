@@ -1,14 +1,8 @@
 import re
 
-import nltk
 from nltk import word_tokenize
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import stopwords
-
-nltk.download('wordnet')
-nltk.download('punkt')
-nltk.download('stopwords')
-
 
 def normalize(text: str) -> str:
     norm_text = re.sub(r'[^\w\s\*]', '', text)  # UPDATE: allow '*' sign

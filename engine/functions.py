@@ -1,3 +1,5 @@
+import nltk
+
 from databases import *
 from engine.indexers import *
 
@@ -29,5 +31,8 @@ def force_merge_iindexes():
 
 
 def init_databases():
+    nltk.download('wordnet')
+    nltk.download('punkt')
+    nltk.download('stopwords')
     init_gluster()
     init_redis()
