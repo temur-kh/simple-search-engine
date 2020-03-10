@@ -5,6 +5,8 @@ from databases import get_word_inverted_index, word_exists, get_soundex_iindex, 
 def find_closest_words(query_word, soundex_iindex):
     soundex = get_soundex_form(query_word)
     # find the reduced number of candidates
+    if soundex not in soundex_iindex:
+        return []
     similars = [(word, levinstein_distance(query_word, word)) for word in soundex_iindex[soundex]]
     similars = sorted(similars, key=lambda x: x[1])
     if not len(similars):
