@@ -14,8 +14,11 @@ app = Flask(__name__)
 def handle_query():
     query_sentence: str = request.args.get('query')
     print(query_sentence)
-    doc_ids = search_docs_ids(query_sentence)
-    docs = find_docs(doc_ids)
+    if query_sentence is not None:
+        doc_ids = search_docs_ids(query_sentence)
+        docs = find_docs(doc_ids)
+    else:
+        docs = []
     return render_template('results_page.html', context={'docs': docs})
 
 
