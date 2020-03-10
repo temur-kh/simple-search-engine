@@ -56,10 +56,10 @@ def remove_documents_by_ids(ids):
 def add_documents(docs: [Document]):
     for doc in docs:
         # print(len(volume.listdir(MAIN_IINDEX_DIR_PATH)), 'add_doc')
-        path = os.path.join(DOCUMENTS_DIR_PATH, str(doc.id))
-        with volume.fopen(path, 'w') as f:
+        path = os.path.join(VOLUME_DIR_PATH, DOCUMENTS_DIR_PATH, str(doc.id))
+        with open(path, 'w') as f:
             print(doc.__str__())
-            full_write(f, doc.__str__())
+            f.write(doc.__str__())
 
 
 def get_word_inverted_index(word: str) -> set:
