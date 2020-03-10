@@ -46,7 +46,6 @@ def add_documents(docs: [Document]):
     for doc in docs:
         path = os.path.join(DOCUMENTS_DIR_PATH, str(doc.id))
         with volume.fopen(path, 'w') as f:
-            print(doc.__str__())
             f.write(doc.__str__())
 
 
@@ -106,7 +105,7 @@ def update_iindex(iindex_collection, dir_path):
                 print(str(file, 'utf-8').split())
                 print(str(file).split())
                 print('{}'.format(file.decode()))
-                line = '{}'.format(file.decode('ascii'))
+                line = '{}'.format(file.decode('utf-16'))
                 print(line)
                 print(line.split())
                 old_iindex = set(map(int, line.split()))
