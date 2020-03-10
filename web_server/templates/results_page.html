@@ -18,9 +18,9 @@
     {% for doc in docs %}
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">{% doc.title %}</h5>
-                <p class="card-text">{% doc.text|truncate(50, True) %}</p>
-                <a href="/documents/{% doc.id %}" class="btn btn-outline-secondary">Link</a>
+                <h5 class="card-title">{% doc["title"] %}</h5>
+                <p class="card-text">{% doc["text"]|truncate(50, True) %}</p>
+                <a href="/documents/{% doc["id"] %}" class="btn btn-outline-secondary">Link</a>
             </div>
         </div>
     {% endfor %}
