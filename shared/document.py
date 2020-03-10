@@ -27,9 +27,6 @@ def str_to_doc(line: str):
             id = int(lines[0])
             return Document(id, lines[1], lines[2])
         else:
-            print(len(lines))
-            print(lines)
-            print("NOOOOOOOOOOOOOOOOOOOOO")
             raise Exception
     except:
         print('Document string could not be converted to object: %s' % line)

@@ -7,18 +7,14 @@ from shared import str_to_doc, Document
 
 def get_documents_by_ids(ids):
     docs = []
-    print("I'm hereeeeeeeeee")
     for id in ids:
         path = os.path.join(DOCUMENTS_DIR_PATH, str(id))
         if not os.path.exists(path):
-            print("AAAAAAAAAAAAAAAAAAAAAAAAAAAA")
             continue
         with open(path, 'r') as f:
             # line = custom_decode_text(f.read())
             line = f.read()
-            print(line)
             doc = str_to_doc(line)
-            print(doc)
             if doc:
                 docs.append(doc)
     return docs
@@ -37,7 +33,6 @@ def add_documents(docs: [Document]):
         # print(len(volume.listdir(MAIN_IINDEX_DIR_PATH)), 'add_doc')
         path = os.path.join(DOCUMENTS_DIR_PATH, str(doc.id))
         with open(path, 'w') as f:
-            print(doc.__str__())
             f.write(doc.__str__())
 
 
@@ -54,6 +49,7 @@ def get_word_inverted_index(word: str) -> set:
             # iindex = iindex.union(set(decoded_nums))
             iindex = iindex.union(set(map(int, file.split())))
     path = os.path.join(AUXILIARY_IINDEX_DIR_PATH, word)
+    print(iindex)
     if os.path.exists(path):
         with open(path, 'r') as f:
             file = f.read()
@@ -61,12 +57,14 @@ def get_word_inverted_index(word: str) -> set:
             # iindex = iindex.union(set(decoded_nums))
             iindex = iindex.union(set(map(int, file.split())))
     path = os.path.join(REMOVABLE_IINDEX_DIR_PATH, word)
+    print(iindex)
     if os.path.exists(path):
         with open(path, 'r') as f:
             file = f.read()
             # decoded_nums = custom_decode_ids(file)
             # iindex = iindex.difference(set(decoded_nums))
             iindex = iindex.difference(set(map(int, file.split())))
+    print(iindex)
     return iindex
 
 
