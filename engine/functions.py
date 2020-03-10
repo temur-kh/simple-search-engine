@@ -3,18 +3,19 @@ import nltk
 from databases import *
 from engine.indexers import *
 
-def remove_docs(docs):
-    remove_documents_by_ids([doc.id for doc in docs])
-    iindex = make_inverted_index(docs)
+
+def remove_docs(doc):
+    remove_documents_by_ids([doc.id])
+    iindex = make_inverted_index([doc])
     remove_iindex(iindex)
 
 
-def add_docs(docs):
-    print('Adding docs... Amount:', len(docs))
-    add_documents(docs)
-    iindex = make_inverted_index(docs)
+def add_docs(doc):
+    print('Adding docs...')
+    add_documents([doc])
+    iindex = make_inverted_index([doc])
     add_iindex(iindex)
-    bigram_index, bigram_iindex = bigram_inverted_index(docs)
+    bigram_index, bigram_iindex = bigram_inverted_index([doc])
     words_set = bigram_index.keys()
     add_bigram_iindex(bigram_iindex)
     update_words_set(words_set)

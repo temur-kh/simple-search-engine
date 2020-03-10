@@ -1,5 +1,3 @@
-import time
-
 from shared import ReutersAddStream, ReutersDeleteStream
 from engine.functions import *
 from config import RESOURCES_DIR_PATH
@@ -13,10 +11,12 @@ def crawler():
     while add_stream.has_next():
         if index > 15 and delete_stream.has_next():
             deletable_docs = delete_stream.next()
-            remove_docs(deletable_docs)
+            for doc in deletable_docs:
+                remove_docs(doc)
         addable_docs = add_stream.next()
-        add_docs(addable_docs)
-        merge_iindexes_if_needed()
+        for doc in addable_docs:
+            add_docs(doc)
+            merge_iindexes_if_needed()
     force_merge_iindexes()
 
 

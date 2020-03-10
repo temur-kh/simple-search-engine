@@ -99,7 +99,14 @@ def merge_iindexes():
 def custom_decode(bytes):
     if bytes is not None:
         codes = bytes.decode().split()
-        return [int(0 if str(x).replace('\x00', '') == '' else str(x).replace('\x00', '')) for x in codes]
+        str_nums = [str(x).replace('\x00', '') for x in codes]
+        int_nums = []
+        for num in str_nums:
+            if num == '':
+                int_nums.append(0)
+            else:
+                int_nums.append(int(num))
+        return int_nums
     else:
         return []
 
