@@ -26,10 +26,11 @@ def handle_document_link(doc_id):
     return render_template('document_page.html', context={'doc': docs[0]})
 
 
-def process(redis_ip, gluster_ip):
+def process(namespace):
     global GLUSTERFS_MASTER_IP_ADDRESS, REDIS_MASTER_IP_ADDRESS
-    GLUSTERFS_MASTER_IP_ADDRESS = gluster_ip
-    REDIS_MASTER_IP_ADDRESS = redis_ip
+    print(namespace)
+    GLUSTERFS_MASTER_IP_ADDRESS = namespace.gluster_ip
+    REDIS_MASTER_IP_ADDRESS = namespace.redis_ip
     nltk.download('wordnet')
     nltk.download('punkt')
     nltk.download('stopwords')
