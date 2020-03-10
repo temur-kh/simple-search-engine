@@ -107,7 +107,6 @@ def update_iindex(iindex_collection, dir_path):
         iindex = iindex_collection[word]
         if volume.exists(path):
             with volume.fopen(path, 'r') as f:
-                print(word)
                 file = f.read()
                 decoded_nums = custom_decode(file)
                 old_iindex = set(decoded_nums)
