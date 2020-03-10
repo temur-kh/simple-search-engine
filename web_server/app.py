@@ -34,4 +34,4 @@ def process(namespace):
     nltk.download('wordnet')
     nltk.download('punkt')
     nltk.download('stopwords')
-    app.run(debug=True)
+    app.run('0.0.0.0', debug=True)
