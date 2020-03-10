@@ -83,7 +83,8 @@ def merge_iindexes():
         remove_path = os.path.join(REMOVABLE_IINDEX_DIR_PATH, word)
         iindex = get_word_inverted_index(word)
         content = ' '.join([str(doc for doc in iindex)])
-        with volume.fopen(main_path, 'wb') as f:
+        print(content)
+        with volume.fopen(main_path, 'w') as f:
             f.write(content)
         if volume.exists(aux_path):
             volume.remove(aux_path)
