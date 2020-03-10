@@ -99,7 +99,7 @@ def update_iindex(iindex_collection, dir_path):
             with volume.fopen(path, 'rb') as f:
                 file = f.read()
                 print(file)
-                line = '{}'.format(file.decode())
+                line = '{}'.format(file.decode('ASCII'))
                 print(line.split())
                 old_iindex = set(map(int, line.split()))
             iindex = iindex.union(old_iindex)
