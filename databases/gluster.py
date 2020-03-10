@@ -20,6 +20,13 @@ def _get_volume():
 volume = _get_volume()
 
 
+def full_write(file, content):
+    chunks, chunk_size = len(content), 20
+    for i in range(0, chunks, chunk_size):
+        chunk = content[i:min(i+chunk_size, chunks)]
+        file.write(chunk)
+
+
 def get_documents_by_ids(ids):
     docs = []
     print("I'm hereeeeeeeeee")
@@ -52,7 +59,7 @@ def add_documents(docs: [Document]):
         path = os.path.join(DOCUMENTS_DIR_PATH, str(doc.id))
         with volume.fopen(path, 'w') as f:
             print(doc.__str__())
-            f.write(doc.__str__())
+            full_write(f, doc.__str__())
 
 
 def get_word_inverted_index(word: str) -> set:
