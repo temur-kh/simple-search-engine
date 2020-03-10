@@ -95,6 +95,7 @@ def update_iindex(iindex_collection, dir_path):
         if volume.exists(path):
             with volume.fopen(path, 'rb') as f:
                 cont = f.read()
+                print(cont, cont.decode('utf-8'))
                 old_iindex = set(map(int, cont.strip().split()))
             iindex = iindex.union(old_iindex)
         content = ' '.join([str(doc_id) for doc_id in iindex])
