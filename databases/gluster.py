@@ -29,7 +29,7 @@ def get_documents_by_ids(ids):
             print("AAAAAAAAAAAAAAAAAAAAAAAAAAAA")
             continue
         with volume.fopen(path, 'r') as f:
-            line = f.read().decode('utf-8').strip()
+            line = custom_decode_text(f.read())
             print(line)
             doc = str_to_doc(line)
             print(doc)
