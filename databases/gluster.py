@@ -99,10 +99,9 @@ def update_iindex(iindex_collection, dir_path):
             with volume.fopen(path, 'rb') as f:
                 file = f.read()
                 print(file)
-                print(file.decode('utf-8').strip())
-                print(str(file.decode('utf-8')).split())
-                print(file.decode('utf-8').strip().split())
-                old_iindex = set(map(int, file.decode('utf-8').strip().split()))
+                line = '{}'.format(file.decode('utf-8').strip())
+                print(line.split())
+                old_iindex = set(map(int, line.split()))
             iindex = iindex.union(old_iindex)
         content = ' '.join([str(doc_id) for doc_id in iindex])
         with volume.fopen(path, 'wb') as f:
