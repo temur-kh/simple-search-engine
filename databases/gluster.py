@@ -103,7 +103,7 @@ def update_iindex(iindex_collection, dir_path):
                 # print(file.decode())
                 # print(str(file.decode().encode()))
                 print(str(file, 'utf-8').split())
-                line = '{}'.format(file.decode('utf-16'))
+                # line = '{}'.format(file.decode('utf-16'))
                 print(line)
                 print(list(map(lambda x: x.encode('iso-8859-1').decode('utf-8'), line.split())))
                 print(list(map(lambda x: x.encode('iso-8859-1').decode('utf-16'), line.split())))
