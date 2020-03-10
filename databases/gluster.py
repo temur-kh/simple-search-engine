@@ -61,7 +61,6 @@ def get_word_inverted_index(word: str) -> set:
             file = f.read()
             print(file)
             print(file.decode(), 'orgboreibg')
-            print(file.decode('cp1251', 'gerge'))
             decoded_nums = custom_decode(file)
             iindex = iindex.union(set(decoded_nums))
     path = os.path.join(AUXILIARY_IINDEX_DIR_PATH, word)
@@ -117,6 +116,7 @@ def custom_decode(bytes):
 
 def update_iindex(iindex_collection, dir_path):
     for word in iindex_collection:
+        print(volume.listdir(MAIN_IINDEX_DIR_PATH))
         path = os.path.join(dir_path, word)
         iindex = iindex_collection[word]
         if volume.exists(path):
