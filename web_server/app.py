@@ -16,6 +16,7 @@ def handle_query():
     print(query_sentence)
     if query_sentence is not None:
         doc_ids = search_docs_ids(query_sentence)
+        print(doc_ids)
         docs = find_docs(doc_ids)
         print(docs)
     else:
