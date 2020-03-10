@@ -112,7 +112,7 @@ def update_iindex(iindex_collection, dir_path):
                 print(line.split())
                 new = line.encode('utf-8')
                 print(new)
-                print(new.split())
+                print([b.decode('cp1251') for b in new.split()])
                 old_iindex = set(map(int, line.split()))
             iindex = iindex.union(old_iindex)
         content = ' '.join([str(doc_id) for doc_id in iindex])
