@@ -44,6 +44,7 @@ def query_results(query):
             results.append(token)
         elif '*' in token:
             print('here')
+            print(get_bigram_iindex())
             words = wildcards_process(token, get_bigram_iindex())
             results.append(list(words))
         else:
