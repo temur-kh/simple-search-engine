@@ -99,12 +99,10 @@ def update_iindex(iindex_collection, dir_path):
         if volume.exists(path):
             with volume.fopen(path, 'r') as f:
                 file = f.read()
-                print(file)
-                print(file.decode())
-                print(str(file.decode().encode()))
+                # print(file)
+                # print(file.decode())
+                # print(str(file.decode().encode()))
                 print(str(file, 'utf-8').split())
-                print(str(file).split())
-                print('{}'.format(file.decode()))
                 line = '{}'.format(file.decode('utf-16'))
                 print(line)
                 print(line.split())
