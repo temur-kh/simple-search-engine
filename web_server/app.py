@@ -19,7 +19,7 @@ def handle_query():
         docs = find_docs(doc_ids)
     else:
         docs = []
-    return render_template('results_page.html', context={'docs': docs})
+    return render_template('results_page.html', docs=docs)
 
 
 @app.route('/documents/<doc_id>', methods=['GET'])
@@ -27,7 +27,7 @@ def handle_document_link(doc_id):
     docs = find_docs([int(doc_id)])
     if not len(docs):
         abort(404)
-    return render_template('document_page.html', context={'doc': docs[0]})
+    return render_template('document_page.html', doc=docs[0])
 
 
 def process(namespace):
