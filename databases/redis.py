@@ -61,6 +61,5 @@ def add_redis_iindex(iindex_collection, old_iindex_collection):
 
 
 def init_redis():
-    r.sadd(WORDS_SET, {})
     r.set(BIGRAM_IINDEX_DICT, json.dumps({}))
     r.set(SOUNDEX_IINDEX_DICT, json.dumps({}))
