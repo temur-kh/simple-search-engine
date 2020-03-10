@@ -25,9 +25,10 @@ def get_documents_by_ids(ids):
     for id in ids:
         path = os.path.join(DOCUMENTS_DIR_PATH, str(id))
         if not volume.exists(path):
+            print("AAAAAAAAAAAAAAAAAAAAAAAAAAAA")
             continue
         with volume.fopen(path, 'r') as f:
-            line = f.read(1).decode('utf-8').strip()
+            line = f.read().decode('utf-8').strip()
             doc = str_to_doc(line)
             if doc:
                 docs.append(doc)
