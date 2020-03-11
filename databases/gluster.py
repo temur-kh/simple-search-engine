@@ -23,7 +23,7 @@ def get_documents_by_ids(ids):
 def remove_documents_by_ids(ids):
     for id in ids:
         path = os.path.join(DOCUMENTS_DIR_PATH, str(id))
-        if not os.path.exists(path):
+        if not os.path.isfile(path):
             continue
         os.remove(path)
 
@@ -84,9 +84,9 @@ def merge_iindexes():
         with open(main_path, 'w') as f:
             # print(content)
             f.write(content)
-        if os.path.exists(aux_path):
+        if os.path.isfile(aux_path):
             os.remove(aux_path)
-        if os.path.exists(remove_path):
+        if os.path.isfile(remove_path):
             os.remove(remove_path)
 
 
