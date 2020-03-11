@@ -142,15 +142,15 @@ def add_iindex(iindex_collection):
 
 def init_gluster():
     if os.path.exists(MAIN_IINDEX_DIR_PATH):
-        shutil.rmtree(MAIN_IINDEX_DIR_PATH)
+        shutil.rmtree(MAIN_IINDEX_DIR_PATH, ignore_errors=True)
     os.mkdir(MAIN_IINDEX_DIR_PATH)
     if os.path.exists(AUXILIARY_IINDEX_DIR_PATH):
-        shutil.rmtree(AUXILIARY_IINDEX_DIR_PATH)
+        shutil.rmtree(AUXILIARY_IINDEX_DIR_PATH, ignore_errors=True)
     os.mkdir(AUXILIARY_IINDEX_DIR_PATH)
     if os.path.exists(REMOVABLE_IINDEX_DIR_PATH):
-        shutil.rmtree(REMOVABLE_IINDEX_DIR_PATH)
+        shutil.rmtree(REMOVABLE_IINDEX_DIR_PATH, ignore_errors=True)
     os.mkdir(REMOVABLE_IINDEX_DIR_PATH)
     if os.path.exists(DOCUMENTS_DIR_PATH):
-        shutil.rmtree(DOCUMENTS_DIR_PATH)
+        shutil.rmtree(DOCUMENTS_DIR_PATH, ignore_errors=True)
     os.mkdir(DOCUMENTS_DIR_PATH)
     # print(len(volume.listdir(MAIN_IINDEX_DIR_PATH)), 'start')
