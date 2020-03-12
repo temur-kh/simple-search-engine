@@ -11,7 +11,7 @@ def remove_docs(doc):
 
 
 def add_docs(doc):
-    # print('Adding docs...')
+    print('Adding docs...')
     add_documents([doc])
     iindex = make_inverted_index([doc])
     add_iindex(iindex)
@@ -21,7 +21,7 @@ def add_docs(doc):
     update_words_set(words_set)
     soundex_iindex = soundex_inverted_index(words_set)
     add_soundex_iindex(soundex_iindex)
-    # print('Finished adding docs')
+    print('Finished adding docs')
 
 
 def merge_iindexes_if_needed():
