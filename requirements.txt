@@ -1,6 +1,6 @@
 beautifulsoup4==4.8.2
 Flask==1.1.1
 gfapi==1.2
-Jinja2==2.11.1
+Jinja2==2.11.3
 nltk==3.4.5
 redis==3.4.1
